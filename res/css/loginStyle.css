@@ -1,0 +1,19 @@
+.root {
+    -fx-background-color: white;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px;
+    -fx-font-size: 14px;
+    -fx-font-family: "monospace";
+}
+
+.button:hover{
+    -fx-background-color: #d3d3d3;
+}
+
+.label{
+    -fx-font-size: 20px;
+    -fx-font-family: "monospace";
+}
