@@ -1,5 +1,6 @@
 package programs;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -8,7 +9,7 @@ import java.util.Date;
     and can be utilized by the nutrition client to
     adjust settings.
  */
-public class Schedule {
+public class Schedule implements Serializable {
     private byte repeatCycle;           // Number of days the program repeats
     private Calendar scheduledDate;     // Date of the next planned activity
 

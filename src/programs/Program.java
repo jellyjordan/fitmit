@@ -1,10 +1,12 @@
 package programs;
 
+import java.io.Serializable;
+
 /*
     Class for all user programs. Relies on the schedule
     for sorting and to adjust daily nutritional requirements
  */
-public class Program implements Comparable<Program> {
+public class Program implements Comparable<Program> , Serializable {
 
     private String name;
     private Schedule programSchedule;

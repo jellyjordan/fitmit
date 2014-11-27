@@ -28,11 +28,11 @@ public class ProfileParser {
         Loads all the profiles stored in the saved file and returns
         the entire list
      */
-    public static ArrayList<Profile> loadProfiles(String path){
+    public static ArrayList<Profile> loadProfiles(){
         ArrayList<Profile> profiles = new ArrayList<Profile>();
         try{
             // Opens the stream
-            FileInputStream fileInputStream = new FileInputStream(path);
+            FileInputStream fileInputStream = new FileInputStream("Profiles.ser");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
             // Keeps loading objects until we hit the end

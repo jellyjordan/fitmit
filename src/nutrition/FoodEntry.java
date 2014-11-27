@@ -1,10 +1,12 @@
 package nutrition;
 
+import java.io.Serializable;
+
 /*
     Individual entry which is added to the user's
     daily log to track nutrition.
  */
-public class FoodEntry {
+public class FoodEntry implements Serializable {
     private String name;
     private short calories;
     private short proteins;
