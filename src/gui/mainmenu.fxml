@@ -1,0 +1,21 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<GridPane fx:controller="gui.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+    <Label
+        GridPane.rowIndex="0"
+        GridPane.columnIndex="0"
+        fx:id = "welcomeLabel"
+        text="Who's eating?">
+    </Label>
+    <Button
+        GridPane.rowIndex="1"
+        GridPane.columnIndex="0"
+        fx:id = "newUserButton"
+        text = "someone new?">
+    </Button>
+
+</GridPane>

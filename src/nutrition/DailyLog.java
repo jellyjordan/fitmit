@@ -2,6 +2,7 @@ package nutrition;
 
 import account.Profile;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /*
@@ -9,7 +10,7 @@ import java.util.ArrayList;
   and can be configured to scale with the users' program
   schedule and their goals.
  */
-public class DailyLog {
+public class DailyLog implements Serializable{
     private short calorieLimit;
     private short proteinLimit;
     private short carbohydrateLimit;
@@ -18,7 +19,7 @@ public class DailyLog {
     private short currentProtein;
     private short currentFats;
     private short currentCarbohydrates;
-    private ArrayList<FoodEntry> foodEntries;
+    transient private ArrayList<FoodEntry> foodEntries;
 
     public DailyLog(){
         foodEntries = new ArrayList<FoodEntry>();
@@ -53,6 +54,7 @@ public class DailyLog {
         carbohydrateLimit = carbohydrate;
     }//end constructor - user assigns values
 
+    // Setters
     public void setCarbohydrateLimit(short carbohydrateLimit) {
         this.carbohydrateLimit = carbohydrateLimit;
     }
@@ -85,6 +87,7 @@ public class DailyLog {
         this.currentProtein = currentProtein;
     }
 
+    // Getters
     public short getCalorieLimit() {
         return calorieLimit;
     }
@@ -127,7 +130,7 @@ public class DailyLog {
         currentCarbohydrates += entry.getCarbohydrates();
         currentFats += entry.getFats();
         currentProtein += entry.getProteins();
-    }//end method - food entry added
+    }
 
     public void removeEntry(FoodEntry entry){
         foodEntries.remove(entry);
@@ -135,11 +138,11 @@ public class DailyLog {
         currentCarbohydrates -= entry.getCarbohydrates();
         currentFats -= entry.getFats();
         currentProtein -= entry.getProteins();
-    }//end method - food entry removed
+    }
 
     /*
-        Updates the current totals for the log
-        after an entry has been edited
+        Updates all the food entries information into
+        the log, for when we are loading logs
      */
     private void updateCurrents(){
         for(FoodEntry entry : foodEntries){

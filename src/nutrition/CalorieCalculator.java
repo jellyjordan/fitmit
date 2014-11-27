@@ -5,7 +5,7 @@ package nutrition;
     for the user's nutrition logging system. For use with
     metric data.
  */
-public class CalorieCalculator {
+public class  CalorieCalculator {
 
     /*
         Uses Mifflin - St Jeor Formula for BMR calculations

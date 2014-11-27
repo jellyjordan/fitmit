@@ -1,10 +1,10 @@
 package programs;
 
 /*
-    Abstract class for all user programs. Relies on the schedule
-    for GUI sorting and to adjust daily nutritional requirements
+    Class for all user programs. Relies on the schedule
+    for sorting and to adjust daily nutritional requirements
  */
-public abstract class Program implements Comparable<Program> {
+public class Program implements Comparable<Program> {
 
     private String name;
     private Schedule programSchedule;
@@ -13,23 +13,27 @@ public abstract class Program implements Comparable<Program> {
         this.name = name;
         programSchedule = new Schedule();
     }
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String toString() {
         return name;
     }
 
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Getters
     public Schedule getProgramSchedule() {
         return programSchedule;
     }
 
     /*
-        Sorts and updates the program's schedule
+        Sorts and updates the program's schedule by their
+        next scheduled date
      */
     @Override
     public int compareTo(Program program) {
         return getProgramSchedule().getScheduledDate().compareTo(program.getProgramSchedule().getScheduledDate());
-    }//end method - compare scheduled date
+    }
 }
