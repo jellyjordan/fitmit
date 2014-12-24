@@ -8,9 +8,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
 import java.util.ArrayList;
-
+/*
+    Controller used for the welcoming screen which allows
+    users to select a profile or create a new one
+ */
 public class LoginController {
-@FXML HBox profileBox;
+    @FXML HBox profileBox;
 
     /*
         Updates the main page with the profiles loaded
