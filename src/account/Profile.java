@@ -28,6 +28,11 @@ public class Profile implements Serializable{
      */
     public Profile(String userName){
         this.userName = userName;
+        userWeight = 0;
+        userHeight = 160;
+        userAge = 20;
+        userIsMale = true;
+        goalFlag = 1;
         lastLogin = Calendar.getInstance();
     }
 
@@ -112,11 +117,16 @@ public class Profile implements Serializable{
         // It is a new day!
         if(todaysDate.DATE != lastLogin.DATE){
             // Updates the programs' schedules
-            for(Program program : programList){
-                program.getProgramSchedule().updateSchedule();
+            if(userWeight == 0){
+                dailyLog = new DailyLog();
             }
-            // Assigns a new food log using profile settings
-            dailyLog = new DailyLog(this);
+            else{
+                for(Program program : programList){
+                    program.getProgramSchedule().updateSchedule();
+                }
+                // Assigns a new food log using profile settings
+                dailyLog = new DailyLog(this);
+            }
         }
     }
 }
