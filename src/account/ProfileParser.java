@@ -51,4 +51,34 @@ public class ProfileParser {
         }
         return profiles;
     }
+
+    /*
+        Returns the profile with the supplied username
+     */
+    public static Profile loadProfile(String username){
+        Profile profile;
+        try{
+            // Opens the stream
+            FileInputStream fileInputStream = new FileInputStream("Profiles.ser");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+            // Keeps loading objects until we hit the end
+            Object loadedProfile;
+            while ( (loadedProfile = objectInputStream.readObject()) != null){
+                profile = (Profile) loadedProfile;
+                if(profile.getUserName() == username){
+                    return profile;
+                }
+            }
+            objectInputStream.close();
+        }
+        catch(IOException ex){
+            ex.printStackTrace();
+        }
+        catch(ClassNotFoundException ex){
+            ex.printStackTrace();
+        }
+        // Dummy profile if load fails
+        return new Profile("Dummy");
+    }
 }
