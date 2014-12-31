@@ -15,10 +15,27 @@ public class ProfileParser {
      */
     public static void saveProfile(Profile profile){
         try{
+            boolean newProfile = true;
+            // Loads profiles
+            ArrayList<Profile> profiles = loadProfiles();
+
+            // Update profiles
+            for(Profile loadedProfile : profiles){
+                if(profile.getUserName() == loadedProfile.getUserName()){
+                    newProfile = false;
+                    loadedProfile = profile;
+                    break;
+                }
+            }
+            // Add new profile if it is not an updated profile
+            if(newProfile){
+                profiles.add(profile);
+            }
             FileOutputStream fileOutputStream = new FileOutputStream("Profiles.ser");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(profile);
+            objectOutputStream.writeObject(profiles);
             objectOutputStream.close();
+            fileOutputStream.close();
         }
         catch(IOException ex){
             ex.printStackTrace();
@@ -32,16 +49,17 @@ public class ProfileParser {
         ArrayList<Profile> profiles = new ArrayList<Profile>();
         try{
             // Opens the stream
-            FileInputStream fileInputStream = new FileInputStream("Profiles.ser");
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            File profileFile = new File("Profiles.ser");
+            if(profileFile.exists()){
+                FileInputStream fileInputStream = new FileInputStream("Profiles.ser");
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-            // Keeps loading objects until we hit the end
-            Object loadedProfile;
-            while ( (loadedProfile = objectInputStream.readObject()) != null){
-                Profile profile = (Profile) loadedProfile;
-                profiles.add(profile);
+                // Loads the object expected to be arraylist of profiles
+                Object loadedProfiles;
+                loadedProfiles = objectInputStream.readObject();
+                profiles = (ArrayList<Profile>) loadedProfiles;
+                objectInputStream.close();
             }
-            objectInputStream.close();
         }
         catch(IOException ex){
             ex.printStackTrace();
@@ -53,32 +71,16 @@ public class ProfileParser {
     }
 
     /*
-        Returns the profile with the supplied username
+        Fetches the specific profile with the matching username
      */
-    public static Profile loadProfile(String username){
-        Profile profile;
-        try{
-            // Opens the stream
-            FileInputStream fileInputStream = new FileInputStream("Profiles.ser");
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-
-            // Keeps loading objects until we hit the end
-            Object loadedProfile;
-            while ( (loadedProfile = objectInputStream.readObject()) != null){
-                profile = (Profile) loadedProfile;
-                if(profile.getUserName() == username){
-                    return profile;
-                }
+    public static Profile getProfile(String userName){
+        ArrayList<Profile> profiles = loadProfiles();
+        for(Profile profile : profiles){
+            if(profile.getUserName().equals(userName)){
+                return profile;
             }
-            objectInputStream.close();
         }
-        catch(IOException ex){
-            ex.printStackTrace();
-        }
-        catch(ClassNotFoundException ex){
-            ex.printStackTrace();
-        }
-        // Dummy profile if load fails
-        return new Profile("Dummy");
+        return null;
     }
+
 }
