@@ -2,6 +2,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
 <GridPane fx:controller="gui.controllers.LoginController"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
     <Label
@@ -10,18 +12,32 @@
         fx:id = "welcomeLabel"
         text="Who's eating?">
     </Label>
-    <HBox
+    <VBox
         GridPane.columnIndex="0"
         GridPane.rowIndex="1"
         fx:id = "profileBox">
-    </HBox>
+        <HBox
+            fx:id = "newUserBox"
+            visible="false">
+            <TextField
+                fx:id = "newUserField"
+                prefWidth="100">
+            </TextField>
+            <Button
+                fx:id = "newUserButton"
+                text="OK"
+                onAction="#submitUser">
+            </Button>
+        </HBox>
+    </VBox>
     <HBox
         GridPane.columnIndex="0"
         GridPane.rowIndex="2">
         <Button
-                fx:id = "newUserButton"
+                fx:id = "startNewUserButton"
                 prefWidth="100"
-                text = "NEW USER">
+                text = "NEW USER"
+                onAction="#createUser">
         </Button>
     </HBox>
 
