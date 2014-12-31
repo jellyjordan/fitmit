@@ -1,5 +1,8 @@
 package gui.viewport;
 
+import account.Profile;
+import account.ProfileParser;
+import gui.controllers.LoginController;
 import gui.controllers.ViewController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /*
     Class handles the transitioning of views by loading
@@ -34,8 +38,19 @@ public class ViewManager {
     public static void loadView(String viewPath){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            // Sets the main stackpane's children to the loaded fxml layout
-            Node node = fxmlLoader.load(ViewManager.class.getResource(viewPath));
+            /*
+                Loads the new view and does dynamic page updating in
+                special cases
+             */
+            Node node = fxmlLoader.load(ViewManager.class.getResourceAsStream(viewPath));
+            // Updates the Login page gui to add buttons for profiles
+            if(viewPath.equals(LOGIN_PAGE)){
+                LoginController controller = fxmlLoader.getController();
+                ArrayList<Profile> profiles = ProfileParser.loadProfiles();
+                if(!profiles.isEmpty()){
+                    controller.updatePage(profiles);
+                }
+            }
             viewController.setView(node);
         }
         catch (IOException ex){
