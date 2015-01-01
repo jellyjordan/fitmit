@@ -20,13 +20,21 @@ import java.util.ArrayList;
  */
 public class ViewManager {
     public static final String LOGIN_PAGE = "../../res/xml/login.fxml";
-    public static final String LOGIN_STYLE = "res/css/loginStyle.css";
+    public static final String NUTRILOG_PAGE = "../../res/xml/dailylog.fxml";
     public static final String VIEW_HOLDER = "../res/xml/mainview.fxml";
 
+    public static final String LOGIN_STYLE = "res/css/loginStyle.css";
+    public static final String NUTRILOG_STYLE = "res/css/dailylogStyle.css";
+
     private static ViewController viewController;
+    private static Scene mainScene;
 
     public static void setViewController(ViewController viewController){
         ViewManager.viewController = viewController;
+    }
+
+    public static void setMainScene(Scene scene){
+        mainScene = scene;
     }
 
     /*
@@ -56,5 +64,13 @@ public class ViewManager {
         catch (IOException ex){
             ex.printStackTrace();
         }
+    }
+
+    /*
+        Loads/replaces the current style sheet
+     */
+    public static void loadStyle(String stylepath){
+        mainScene.getStylesheets().clear();
+        mainScene.getStylesheets().add(stylepath);
     }
 }
