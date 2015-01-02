@@ -3,6 +3,7 @@ package gui.controllers;
 import account.Profile;
 import account.ProfileParser;
 import account.Session;
+import gui.viewport.ViewManager;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -63,7 +64,10 @@ public class LoginController {
 
                     // Binds the profile to the session, so long as no other profile is assigned
                     Session.getSession().setProfile(clickedProfile);
-                    System.out.println(clickedProfile.getUserName());
+
+                    // Loads the nutritional log page associated with the profile
+                    ViewManager.loadView(ViewManager.NUTRILOG_PAGE);
+                    ViewManager.loadStyle(ViewManager.NUTRILOG_STYLE);
                 }
             });
             profileBox.getChildren().add(button);
