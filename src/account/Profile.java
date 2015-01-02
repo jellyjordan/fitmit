@@ -95,6 +95,10 @@ public class Profile implements Serializable{
         return userName;
     }
 
+    public DailyLog getDailyLog(){
+        return dailyLog;
+    }
+
     /*
         Checks the first date in the sorted program list to see if the day
         matches the current day. Used for nutritional assignment
