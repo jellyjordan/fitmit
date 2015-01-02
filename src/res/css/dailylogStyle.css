@@ -1,0 +1,34 @@
+.root {
+    -fx-background-color: white;
+}
+
+.table-column .label  {
+    -fx-font-size: 10px;
+    -fx-font-family: "monospace";
+}
+
+#removeButton , #addButton{
+    -fx-pref-width: 40px;
+    -fx-pref-height: 40px;
+}
+
+#goalLabel , #currentLabel{
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.label{
+    -fx-font-size: 10px;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px;
+    -fx-font-size: 14px;
+    -fx-font-family: "monospace";
+}
+
+.button:hover{
+    -fx-background-color: #d3d3d3;
+}
+

@@ -40,5 +40,4 @@
                 onAction="#createUser">
         </Button>
     </HBox>
-
 </GridPane>
