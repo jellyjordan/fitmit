@@ -124,6 +124,10 @@ public class DailyLog implements Serializable{
         return(short)((calorieLimit - currentCalories));
     }
 
+    public ArrayList<FoodEntry> getFoodEntries() {
+        return foodEntries;
+    }
+
     public void addEntry(FoodEntry entry){
         foodEntries.add(entry);
         currentCalories += entry.getCalories();
