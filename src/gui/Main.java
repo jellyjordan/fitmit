@@ -9,7 +9,6 @@ import gui.controllers.ViewController;
 import gui.viewport.ViewManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -30,15 +29,24 @@ public class Main extends Application {
         ViewController viewController = loader.getController();
         ViewManager.setViewController(viewController);
 
-
-        ViewManager.loadView(ViewManager.LOGIN_PAGE);
-
+        /*
+            Initializes the scene and stores it's reference in the ViewManager to
+            allow dynamic loading of CSS files with fxml loading
+         */
         Scene mainScene = new Scene(root , RESOLUTION_X , RESOLUTION_Y);
-        mainScene.getStylesheets().add(ViewManager.LOGIN_STYLE);
+        ViewManager.setMainScene(mainScene);
 
-        primaryStage.setTitle("Fit Mit");
+        /*
+            Loads the login page and style sheet into the viewport
+         */
+        ViewManager.loadView(ViewManager.LOGIN_PAGE);
+        ViewManager.loadStyle(ViewManager.LOGIN_STYLE);
+
+        /*
+            Initializes the window and its attributes
+         */
+        primaryStage.setTitle("FitMit");
         primaryStage.setScene(mainScene);
-
         primaryStage.setResizable(false);
         primaryStage.setFullScreen(false);
         primaryStage.show();
@@ -48,14 +56,4 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
-    /*
-    private ObservableList<Profile> getProfiles(){
-        ArrayList<Profile> profiles = ProfileParser.loadProfiles();
-        ObservableList<Profile> observableProfiles = new ObservableList<Profile>();
-        for(Profile profile : profiles){
-            observableProfiles.add(profile);
-        }
-    }
-    */
 }
