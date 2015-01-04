@@ -17,11 +17,11 @@ public class DatabaseCommunicator {
 
     // Selects all values needed to create a food entry
     private static final String SELECT_ALL =    "SELECT description , calories , protein , lipid , carbohydrate " +
-                                                "FROM foodData";
+                                                "FROM foodData ";
 
     // Selects the names of a food item
     private static final String SELECT_NAME =   "SELECT description " +
-                                                "FROM foodData";
+                                                "FROM foodData ";
 
     private static Connection dbConnection;
 
@@ -41,7 +41,7 @@ public class DatabaseCommunicator {
                 Stops after result set is empty or we find more than 5
                 in order to keep operation time down
              */
-            while (results.next() || possibleEntries.size() > 5){
+            while (results.next() && possibleEntries.size() < 5){
                 possibleEntries.add(results.getString("description"));
             }
         }
@@ -67,14 +67,18 @@ public class DatabaseCommunicator {
             Statement queryEx = dbConnection.createStatement();
             ResultSet results = queryEx.executeQuery(query);
 
-            short calories = (short) (results.getInt("calories") * scale);
-            short carbs = (short) (results.getInt("carbohydrate") * scale);
-            short fats = (short) (results.getInt("lipid") * scale);
-            short proteins = (short) (results.getInt("protein") * scale);
+            // Creates the food entry if query returns a result
+            if(results.next()){
+                // Scales the nutrients based on weight
+                short calories = (short) (results.getInt("calories") * scale);
+                short carbs = (short) (results.getInt("carbohydrate") * scale);
+                short fats = (short) (results.getInt("lipid") * scale);
+                short proteins = (short) (results.getInt("protein") * scale);
 
-            results.close();
-            foodEntry = new FoodEntry(foodName , calories , carbs , fats , proteins);
-            return foodEntry;
+                results.close();
+                foodEntry = new FoodEntry(foodName , calories , carbs , fats , proteins);
+                return foodEntry;
+            }
         }
         catch(SQLException ex){
             ex.printStackTrace();
