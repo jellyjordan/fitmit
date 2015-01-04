@@ -2,6 +2,7 @@ package gui.viewport;
 
 import account.Profile;
 import account.ProfileParser;
+import gui.controllers.DailyLogController;
 import gui.controllers.LoginController;
 import gui.controllers.ViewController;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import nutrition.DailyLog;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,13 +53,28 @@ public class ViewManager {
                 special cases
              */
             Node node = fxmlLoader.load(ViewManager.class.getResourceAsStream(viewPath));
-            // Updates the Login page gui to add buttons for profiles
-            if(viewPath.equals(LOGIN_PAGE)){
-                LoginController controller = fxmlLoader.getController();
-                ArrayList<Profile> profiles = ProfileParser.loadProfiles();
-                if(!profiles.isEmpty()){
-                    controller.updatePage(profiles);
-                }
+
+            switch (viewPath){
+                /*
+                    Updates the list of available profiles to select
+                    from the load file and add them to the gui as buttons
+                 */
+                case LOGIN_PAGE:
+                    LoginController loginController = fxmlLoader.getController();
+                    ArrayList<Profile> profiles = ProfileParser.loadProfiles();
+                    if(!profiles.isEmpty()){
+                        loginController.updatePage(profiles);
+                    }
+                    break;
+                /*
+                    Updates the daily logs gui to match values
+                    of the loaded profile
+                 */
+                case NUTRILOG_PAGE:
+                    DailyLogController dailyLogController = fxmlLoader.getController();
+                    dailyLogController.updateTotalLables();
+                    break;
+
             }
             viewController.setView(node);
         }
