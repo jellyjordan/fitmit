@@ -34,6 +34,8 @@ public class Profile implements Serializable{
         userIsMale = true;
         goalFlag = 1;
         lastLogin = Calendar.getInstance();
+        programList = new ArrayList<Program>();
+        dailyLog = new DailyLog();
     }
 
     //User set up constructor
