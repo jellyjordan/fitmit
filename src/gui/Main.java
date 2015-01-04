@@ -5,13 +5,17 @@
 
 package gui;
 
+import account.ProfileParser;
+import account.Session;
 import gui.controllers.ViewController;
 import gui.viewport.ViewManager;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class Main extends Application {
     public static final int RESOLUTION_X = 800;
@@ -42,6 +46,18 @@ public class Main extends Application {
         ViewManager.loadView(ViewManager.LOGIN_PAGE);
         ViewManager.loadStyle(ViewManager.LOGIN_STYLE);
 
+        /*
+            If a session still exists and the window is closed, the
+            profile state will be saved with any changes made.
+         */
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                if(Session.getProfile() != null){
+                    ProfileParser.saveProfile(Session.getProfile());
+                }
+            }
+        });
         /*
             Initializes the window and its attributes
          */
