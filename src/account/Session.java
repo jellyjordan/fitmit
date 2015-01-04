@@ -25,7 +25,7 @@ public class Session {
          */
         if(Session.profile == null){
             Session.profile = profile;
-            profile.syncProfile();
+            Session.profile.syncProfile();
         }
     }
 

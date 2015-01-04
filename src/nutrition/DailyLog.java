@@ -19,7 +19,7 @@ public class DailyLog implements Serializable{
     private short currentProtein;
     private short currentFats;
     private short currentCarbohydrates;
-    transient private ArrayList<FoodEntry> foodEntries;
+    private ArrayList<FoodEntry> foodEntries;
 
     public DailyLog(){
         foodEntries = new ArrayList<FoodEntry>();
@@ -129,6 +129,10 @@ public class DailyLog implements Serializable{
     }
 
     public void addEntry(FoodEntry entry){
+        System.out.println("Adding:" + entry.getName());
+        if(foodEntries == null){
+            foodEntries = new ArrayList<FoodEntry>();
+        }
         foodEntries.add(entry);
         currentCalories += entry.getCalories();
         currentCarbohydrates += entry.getCarbohydrates();
