@@ -4,6 +4,7 @@
 
 <VBox  fx:controller="gui.controllers.ViewController" xmlns:fx="http://javafx.com/fxml">
     <children>
+        <HBox fx:id="overlayHolder"/>
         <StackPane fx:id="viewHolder" VBox.vgrow="ALWAYS" />
     </children>
 </VBox>

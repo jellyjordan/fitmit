@@ -1,0 +1,22 @@
+#profileButton{
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px;
+    -fx-background-image: url("../img/default_profile.png");
+    -fx-font-family: "monospace";
+}
+
+#profileButton:hover{
+    -fx-background-radius: 8;
+    -fx-background-color: #8FBBBC;
+}
+
+#nameLabel{
+    -fx-font-size: 14px;
+    -fx-font-family: "monospace";
+}
+
+#profileOverlayBox{
+    -fx-background-color: #5f9ea0;
+    -fx-spacing: 10;
+    -fx-alignment: "center-right";
+}
