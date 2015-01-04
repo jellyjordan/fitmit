@@ -129,10 +129,6 @@ public class DailyLog implements Serializable{
     }
 
     public void addEntry(FoodEntry entry){
-        System.out.println("Adding:" + entry.getName());
-        if(foodEntries == null){
-            foodEntries = new ArrayList<FoodEntry>();
-        }
         foodEntries.add(entry);
         currentCalories += entry.getCalories();
         currentCarbohydrates += entry.getCarbohydrates();
