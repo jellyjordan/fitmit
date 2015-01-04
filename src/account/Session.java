@@ -23,7 +23,7 @@ public class Session {
             Users must log out and start a new session with
             a new profile in order to access another account
          */
-        if(profile == null){
+        if(Session.profile == null){
             Session.profile = profile;
             profile.syncProfile();
         }
