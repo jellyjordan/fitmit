@@ -4,6 +4,7 @@ import account.Profile;
 import account.ProfileParser;
 import gui.controllers.DailyLogController;
 import gui.controllers.LoginController;
+import gui.controllers.OverlayController;
 import gui.controllers.ViewController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,12 +22,14 @@ import java.util.ArrayList;
     all resources onto the main viewport.
  */
 public class ViewManager {
-    public static final String LOGIN_PAGE = "../../res/xml/login.fxml";
-    public static final String NUTRILOG_PAGE = "../../res/xml/dailylog.fxml";
-    public static final String VIEW_HOLDER = "../res/xml/mainview.fxml";
+    public static final String LOGIN_PAGE =     "../../res/xml/login.fxml";
+    public static final String NUTRILOG_PAGE =  "../../res/xml/dailylog.fxml";
+    public static final String OVERLAY_PAGE =   "../../res/xml/profileoverlay.fxml";
+    public static final String VIEW_HOLDER =    "../res/xml/mainview.fxml";
 
     public static final String LOGIN_STYLE = "res/css/loginStyle.css";
     public static final String NUTRILOG_STYLE = "res/css/dailylogStyle.css";
+    public static final String OVERLAY_STYLE = "res/css/overlayStyle.css";
 
     private static ViewController viewController;
     private static Scene mainScene;
@@ -71,8 +74,10 @@ public class ViewManager {
                     of the loaded profile
                  */
                 case NUTRILOG_PAGE:
+                    loadOverlay(OVERLAY_PAGE);
                     DailyLogController dailyLogController = fxmlLoader.getController();
                     dailyLogController.updateTotalLables();
+                    dailyLogController.updateCurrentLabels();
                     break;
 
             }
@@ -84,10 +89,32 @@ public class ViewManager {
     }
 
     /*
+        Loads the overlay into the main viewport
+     */
+    public static void loadOverlay(String overlayPath){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+            /*
+                Loads overlay fxml and updates the label to match
+                the user profile
+             */
+        try{
+            Node node = fxmlLoader.load(ViewManager.class.getResourceAsStream(overlayPath));
+            OverlayController overlayController = fxmlLoader.getController();
+            overlayController.setProfileLabel();
+            viewController.setOverlay(node);
+        }
+        catch(IOException ex){
+            ex.printStackTrace();
+        }
+    }
+
+
+    /*
         Loads/replaces the current style sheet
      */
     public static void loadStyle(String stylepath){
         mainScene.getStylesheets().clear();
         mainScene.getStylesheets().add(stylepath);
+        mainScene.getStylesheets().add(OVERLAY_STYLE);
     }
 }

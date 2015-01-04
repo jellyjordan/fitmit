@@ -1,0 +1,16 @@
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<GridPane fx:controller="gui.controllers.OverlayController"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+    <Label
+        fx:id="nameLabel"
+        text="error">
+    </Label>
+    <Button
+        fx:id="profileButton"
+        graphic="res/img/default_profile.png"
+        onAction="#openProfile">
+    </Button>
+</GridPane>
