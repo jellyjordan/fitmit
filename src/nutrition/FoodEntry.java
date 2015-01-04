@@ -18,7 +18,7 @@ public class FoodEntry implements Serializable {
         this.calories = calories;
     }
 
-    public FoodEntry(String name, short calories , short proteins , short fats , short carbohydrates){
+    public FoodEntry(String name, short calories , short carbohydrates , short fats , short proteins){
         this.name = name;
         this.calories = calories;
         this.proteins = proteins;
