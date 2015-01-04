@@ -21,7 +21,7 @@ public class ProfileParser {
 
             // Update profiles
             for(Profile loadedProfile : profiles){
-                if(profile.getUserName() == loadedProfile.getUserName()){
+                if(profile.getUserName().equals(loadedProfile.getUserName())){
                     newProfile = false;
                     loadedProfile = profile;
                     break;
