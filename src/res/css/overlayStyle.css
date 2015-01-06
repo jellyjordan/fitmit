@@ -15,6 +15,19 @@
     -fx-font-family: "monospace";
 }
 
+#dateLabel{
+    -fx-padding: 0 0 0 50;
+    -fx-font-size: 14px;
+    -fx-font-family: "monospace";
+    -fx-font-weight: bold;
+}
+
+#dateOverlayBox{
+    -fx-background-color: #5f9ea0;
+    -fx-spacing: 10;
+    -fx-alignment: "center-left";
+}
+
 #profileOverlayBox{
     -fx-background-color: #5f9ea0;
     -fx-spacing: 10;

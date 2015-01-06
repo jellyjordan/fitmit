@@ -4,7 +4,18 @@
 
 <?import javafx.scene.layout.HBox?>
 <GridPane fx:controller="gui.controllers.OverlayController"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="0" vgap="0">
+    <HBox
+        fx:id="dateOverlayBox"
+        prefWidth="400"
+        prefHeight="40"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="0">
+        <Label
+                fx:id="dateLabel"
+                text="null">
+        </Label>
+    </HBox>
     <HBox
         fx:id="profileOverlayBox"
         prefWidth="800"
