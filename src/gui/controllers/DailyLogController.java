@@ -2,11 +2,13 @@ package gui.controllers;
 
 import account.Session;
 import database.DatabaseCommunicator;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -39,7 +41,7 @@ public class DailyLogController {
         Uses the foodSearch textfield's current input when a key is pressed
         to suggest a full item name containing the text.
      */
-    public void suggestItem(){
+    public void suggestItem(ActionEvent ev){
         String currentInput = foodSearch.getEditor().getText();
         if(currentInput.length() > 4){
             DatabaseCommunicator.openConnection();
@@ -47,9 +49,19 @@ public class DailyLogController {
             // Returns a list no greater than size 5 of possible food items
             ArrayList<String> foodList = DatabaseCommunicator.findSimilarFoods(currentInput);
 
-            ObservableList<String> comboList = foodSearch.getItems();
-            comboList.clear();
-            comboList.addAll(foodList);
+            /*
+                Clearing the observablelist causes an exception when an
+                item is selected. Running the clear "later" provides time
+                for the selection model to make it's changes.
+             */
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    ObservableList<String> comboList = foodSearch.getItems();
+                    comboList.setAll(foodList);
+                }
+            });
+
 
             DatabaseCommunicator.closeConnection();
         }
