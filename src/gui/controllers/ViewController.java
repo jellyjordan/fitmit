@@ -18,9 +18,9 @@ public class ViewController {
         Replaces all children with the param node
      */
     public void setView(Node node){
-        viewHolder.getChildren().addAll(node);
+        viewHolder.getChildren().setAll(node);
     }
     public void setOverlay(Node node){
-        overlayHolder.getChildren().addAll(node);
+        overlayHolder.getChildren().setAll(node);
     }
 }
